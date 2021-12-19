@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cD66loJhGJdttdbvtVt9Tc3R4n/qyTo1Gm2l7D4CE83VKf5fKYv5WvbQJfj+zSC+dnEHc4Vsv8FwjwcdkkRhUQ==",
+  "dgSpecHash": "siQuoZ7WXehzq0lhFPBEI0tjRfZzRoXJyi6fJc5Rlnxs/1+fhe/Lv4JowZwuok70jO4KF0HNv9V0QnOLxzndcw==",
   "success": true,
-  "projectFilePath": "/mnt/data/Misha/Projects/csharp/MyWallet/Utils/Utils.csproj",
+  "projectFilePath": "/Users/anton/RiderProjects/MyWallet/Utils/Utils.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

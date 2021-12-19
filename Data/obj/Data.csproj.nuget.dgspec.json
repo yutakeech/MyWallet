@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/mnt/data/Misha/Projects/csharp/MyWallet/Data/Data.csproj": {}
+    "/Users/anton/RiderProjects/MyWallet/Data/Data.csproj": {}
   },
   "projects": {
-    "/mnt/data/Misha/Projects/csharp/MyWallet/Data/Data.csproj": {
+    "/Users/anton/RiderProjects/MyWallet/Data/Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/mnt/data/Misha/Projects/csharp/MyWallet/Data/Data.csproj",
+        "projectUniqueName": "/Users/anton/RiderProjects/MyWallet/Data/Data.csproj",
         "projectName": "Data",
-        "projectPath": "/mnt/data/Misha/Projects/csharp/MyWallet/Data/Data.csproj",
-        "packagesPath": "/home/misha/.nuget/packages/",
-        "outputPath": "/mnt/data/Misha/Projects/csharp/MyWallet/Data/obj/",
+        "projectPath": "/Users/anton/RiderProjects/MyWallet/Data/Data.csproj",
+        "packagesPath": "/Users/anton/.nuget/packages/",
+        "outputPath": "/Users/anton/RiderProjects/MyWallet/Data/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/misha/.nuget/NuGet/NuGet.Config"
+          "/Users/anton/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -52,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/Users/anton/.dotnet/sdk/6.0.100/RuntimeIdentifierGraph.json"
         }
       }
     }

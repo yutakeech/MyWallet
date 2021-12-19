@@ -46,19 +46,19 @@
     ]
   },
   "packageFolders": {
-    "/home/misha/.nuget/packages/": {}
+    "/Users/anton/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/mnt/data/Misha/Projects/csharp/MyWallet/MyWallet/MyWallet.csproj",
+      "projectUniqueName": "/Users/anton/RiderProjects/MyWallet/MyWallet/MyWallet.csproj",
       "projectName": "MyWallet",
-      "projectPath": "/mnt/data/Misha/Projects/csharp/MyWallet/MyWallet/MyWallet.csproj",
-      "packagesPath": "/home/misha/.nuget/packages/",
-      "outputPath": "/mnt/data/Misha/Projects/csharp/MyWallet/MyWallet/obj/",
+      "projectPath": "/Users/anton/RiderProjects/MyWallet/MyWallet/MyWallet.csproj",
+      "packagesPath": "/Users/anton/.nuget/packages/",
+      "outputPath": "/Users/anton/RiderProjects/MyWallet/MyWallet/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/misha/.nuget/NuGet/NuGet.Config"
+        "/Users/anton/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -70,11 +70,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/mnt/data/Misha/Projects/csharp/MyWallet/Data/Data.csproj": {
-              "projectPath": "/mnt/data/Misha/Projects/csharp/MyWallet/Data/Data.csproj"
+            "/Users/anton/RiderProjects/MyWallet/Data/Data.csproj": {
+              "projectPath": "/Users/anton/RiderProjects/MyWallet/Data/Data.csproj"
             },
-            "/mnt/data/Misha/Projects/csharp/MyWallet/Utils/Utils.csproj": {
-              "projectPath": "/mnt/data/Misha/Projects/csharp/MyWallet/Utils/Utils.csproj"
+            "/Users/anton/RiderProjects/MyWallet/Utils/Utils.csproj": {
+              "projectPath": "/Users/anton/RiderProjects/MyWallet/Utils/Utils.csproj"
             }
           }
         }
@@ -103,7 +103,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/anton/.dotnet/sdk/6.0.100/RuntimeIdentifierGraph.json"
       }
     }
   }

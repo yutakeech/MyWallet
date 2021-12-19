@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Data;
 using Utils;
@@ -90,6 +89,7 @@ class Program
                 currency: filter.Currency, minAmount:
                 filter.MinAmount, maxAmount: filter.MaxAmount);
         object? comparer = null;
+        // Todo: Сделать сортировку по сумме и типу валюты (поддержать интерфейс ISorter)
         if (sorter is not null)
             switch (sorter.Name)
             {
@@ -106,7 +106,7 @@ class Program
     }
 
     private static (MoneyItemsFilter?, MoneyItemsSorter?)
-        ChangSorterFilterAndPrintData(Wallet wallet,
+        ChangeSorterFilterAndPrintData(Wallet wallet,
             MoneyItemsFilter? filter, MoneyItemsSorter? sorter)
     {
 
@@ -124,7 +124,29 @@ class Program
 
     private static void PrintData(IList<MoneyItem> items)
     {
-
+        // Todo: Допилить вывод данных в консоль
+        // 1. Переберём длины значений и выберем наибольшие для каждого столбца
+        /*int lengthAmount = 0;
+        int lengthCurrency = 0;
+        int lengthTarget = 0;
+        int lengthDate = items[0].TransferDate.ToString().Length;
+        foreach (var item in items)
+        {
+            lengthAmount = item.Amount.ToString().Length > lengthAmount ? item.Amount.ToString().Length : lengthAmount;
+            lengthCurrency = item.Currency.ToString().Length > lengthCurrency ? item.Currency.ToString().Length : lengthCurrency;
+            lengthTarget = item.Currency.ToString().Length > lengthTarget ? item.Currency.ToString().Length : lengthTarget;
+        }*/
+        // 2. 
+        Console.WriteLine("________________________________________________________________________________");
+        Console.WriteLine("{0,-10} {1,0} {2,10} {3,10} {4,5} {5, 10} {6,5} {7,9} {8,7}", "|", "Дата", "|", "Сумма",
+            "|", "Валюта", "|", "Цель", "|");
+        foreach (var item in items)
+        {
+            Console.WriteLine("{0, 0} {1,20} {2,3} {3,8} {4, 7} {5, 10} {6,5} {7, 10} {8,6}", "|",
+                $"{item.TransferDate}", "|", $"{item.Amount}", "|", $"{item.Currency}", "|",
+                $"{item.TransferTarget}", "|");
+        }
+        
     }
 
     private static MoneyItemsFilter? ChangeFilter()
@@ -138,8 +160,11 @@ class Program
 
             var dateStart = ReadDateStart();
             var dateEnd = ReadDateEnd(dateStart);
+            var currency = ReadCurrency();
+            var amountFrom = ReadAmountFrom();
+            var amountTo = ReadAmountTo(amountFrom);
 
-            filter = new MoneyItemsFilter() {DateStart = dateStart, DateEnd = dateEnd};
+            filter = new MoneyItemsFilter() {DateStart = dateStart, DateEnd = dateEnd, Currency = currency, MinAmount = amountFrom, MaxAmount = amountTo};
         }
 
         return filter;
@@ -185,12 +210,89 @@ class Program
         return dateStart;
     }
 
+    private static Currency? ReadCurrency()
+    {
+        Currency? currency = null;
+        do
+        {
+            Console.WriteLine("Enter currency or press Enter to skip");
+            string answer = Console.ReadLine();
+            if (!String.IsNullOrEmpty(answer))
+            {
+                try
+                {
+                    currency = Currency.LoadFromString(answer);
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Not supported currency");
+                }
+            }
+        } while (true);
+
+        return currency;
+    }
+
+    private static double? ReadAmountFrom()
+    {
+        double? amountFrom = null;
+        do
+        {
+            Console.WriteLine("Enter start amount or press Enter to skip");
+            string answer = Console.ReadLine();
+            if (!String.IsNullOrEmpty(answer))
+            {
+                try
+                {
+                    amountFrom = Convert.ToDouble(answer);
+                    break;
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine("Not supported format of amount");
+                }
+            }
+
+        } while (true);
+
+        return amountFrom;
+    }
+    
+    private static double? ReadAmountTo(double? amountFrom)
+    {
+        double? amountTo = null;
+        do
+        {
+            Console.WriteLine("Enter start amount or press Enter to skip");
+            string answer = Console.ReadLine();
+            if (!String.IsNullOrEmpty(answer))
+            {
+                try
+                {
+                    amountTo = Convert.ToDouble(answer);
+                    if (amountFrom.HasValue && amountTo < amountFrom)
+                        Console.WriteLine("Max amount should less than min amount");
+                    else
+                        break;
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine("Not supported format of amount");
+                }
+            }
+
+        } while (true);
+
+        return amountFrom;
+    }
+
     private static DateTime? ReadDateEnd(DateTime? dateStart)
     {
         DateTime? dateEnd = null;
         while (true)
         {
-            Console.WriteLine("Enter end date (dd.MM.yyyy) or press enter to skip");
+            Console.WriteLine("Enter end date (dd.MM.yyyy) or press Enter to skip");
             string answer = Console.ReadLine();
             if (!String.IsNullOrEmpty(answer))
             {
@@ -287,7 +389,7 @@ class Program
 
         while (true)
         {
-            var res = ChangSorterFilterAndPrintData(wallet, filter, sorter);
+            var res = ChangeSorterFilterAndPrintData(wallet, filter, sorter);
             filter = res.Item1;
             sorter = res.Item2;
             Console.WriteLine("If you want to continue, press - y;");
@@ -296,7 +398,7 @@ class Program
             if (!String.IsNullOrEmpty(answer) && answer.Equals("y",
                 StringComparison.InvariantCultureIgnoreCase))
             {
-                res = ChangSorterFilterAndPrintData(wallet, filter, sorter);
+                res = ChangeSorterFilterAndPrintData(wallet, filter, sorter);
                 filter = res.Item1;
                 sorter = res.Item2;
             }
