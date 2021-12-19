@@ -9,7 +9,7 @@ class Program
 {
     #region readonly
 
-    private static readonly string dataDir = @"..\..\Data";
+    private static readonly string dataDir = @"../../Data";
     private static readonly string filterFileName = "filter.dat";
     private static readonly string sorterFileName = "sorter.dat";
     private static readonly string walletFileName = "wallet.dat";
@@ -52,7 +52,7 @@ class Program
                 Console.WriteLine($"Cannot read file {filePath}");
             }
         }
-
+        
         return data;
     }
 
@@ -137,7 +137,7 @@ class Program
             lengthTarget = item.Currency.ToString().Length > lengthTarget ? item.Currency.ToString().Length : lengthTarget;
         }*/
         // 2. 
-        Console.WriteLine("________________________________________________________________________________");
+        Console.WriteLine("_____________________________________________________________________________");
         Console.WriteLine("{0,-10} {1,0} {2,10} {3,10} {4,5} {5, 10} {6,5} {7,9} {8,7}", "|", "Дата", "|", "Сумма",
             "|", "Валюта", "|", "Цель", "|");
         foreach (var item in items)
@@ -203,7 +203,10 @@ class Program
                 {
                     Console.WriteLine("Not supported format of datetime");
                 }
-
+            }
+            else
+            {
+                return dateStart;
             }
         }
 
@@ -212,7 +215,7 @@ class Program
 
     private static Currency? ReadCurrency()
     {
-        Currency? currency = null;
+        Currency? currency = new Currency();
         do
         {
             Console.WriteLine("Enter currency or press Enter to skip");
@@ -221,15 +224,35 @@ class Program
             {
                 try
                 {
-                    currency = Currency.LoadFromString(answer);
-                    break;
+                    currency = FindCurrencyByName(answer);
+                    if (String.IsNullOrEmpty(currency.Name))
+                        Console.WriteLine($"Incorrect currency {answer}");
+                    else
+                        break;
                 }
-                catch (Exception e)
+                catch (FormatException ex)
                 {
                     Console.WriteLine("Not supported currency");
                 }
             }
+            else
+            {
+                return currency;
+            }
         } while (true);
+
+        return currency;
+    }
+    
+    public static Currency FindCurrencyByName(string answer)
+    {
+        Currency? currency = null;
+        var items = LoadWallet();
+        foreach (var item in items)
+        {
+            if (answer.ToUpper() == item.Currency.Name)
+                currency = item.Currency;
+        }
 
         return currency;
     }
@@ -253,7 +276,11 @@ class Program
                     Console.WriteLine("Not supported format of amount");
                 }
             }
-
+            else
+            {
+                return amountFrom;
+            }
+            
         } while (true);
 
         return amountFrom;
@@ -281,10 +308,13 @@ class Program
                     Console.WriteLine("Not supported format of amount");
                 }
             }
-
+            else
+            {
+                return amountTo; 
+            }
         } while (true);
 
-        return amountFrom;
+        return amountTo;
     }
 
     private static DateTime? ReadDateEnd(DateTime? dateStart)
@@ -308,9 +338,11 @@ class Program
                 {
                     Console.WriteLine("Not supported format of datetime");
                 }
-
             }
-
+            else
+            {
+                return dateEnd;
+            }
         }
 
         return dateEnd;
@@ -412,5 +444,4 @@ class Program
 
         }
     }
-
 }
